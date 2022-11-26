@@ -3,12 +3,18 @@ import React from "react";
 import Search from "assets/svg/Search.svg";
 import Talent from "assets/svg/Talent.svg";
 import Hiring from "assets/svg/Hiring.svg";
+import SignUpIcon from "assets/svg/SignUpIcon.svg";
+import ApplyIcon from "assets/svg/ApplyIcon.svg";
+import PersonIcon from "assets/svg/PersonIcon.svg";
+import SearchIcon from "assets/svg/SearchIcon.svg";
 import Banner from "assets/images/Banner.png";
 import Img1 from "assets/images/img1.png";
 import Img2 from "assets/images/img2.png";
 import Img3 from "assets/images/img3.png";
 import Img4 from "assets/images/img4.png";
 import Img5 from "assets/images/img5.png";
+import Map from "assets/images/Map.png";
+import SuccessPartners from "assets/images/SuccessPartners.png";
 
 const Homepage = () => {
   return (
@@ -70,6 +76,36 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-0 bg-gradient-to-r from-[#46556A] via-[#232B35] to-[#232B35] w-full p-8">
+        <div className="flex flex-col space-y-4">
+          <IconWithText src={SignUpIcon} text="Sign Up" />
+          <IconWithText
+            src={PersonIcon}
+            text="Build Profile"
+            className="ml-[20%]"
+          />
+          <IconWithText
+            src={SearchIcon}
+            text="Find Jobs"
+            className="ml-[40%]"
+          />
+          <IconWithText src={ApplyIcon} text="Apply" className="ml-[60%]" />
+        </div>
+        <div className="flex flex-col items-center justify-center space-y-12">
+          <p className="text-2xl font-bold text-white text-center">
+            Get started by creating a free account in a few steps.
+          </p>
+          <button className="bg-white px-10 py-3 text-xl font-bold rounded-[8px]">
+            Sign Up Now
+          </button>
+        </div>
+      </div>
+      <div className="p-8">
+        <img src={SuccessPartners} alt="success" className="w-full h-full" />
+      </div>
+      <div className="w-full">
+        <img src={Map} alt="success" className="w-full h-full" />
+      </div>
     </Layout>
   );
 };
@@ -80,6 +116,17 @@ const ImageWithText = ({ src, text }) => (
     <p className="text-white font-light md:font-bold text-center text-xs md:text-lg">
       {text}
     </p>
+  </div>
+);
+
+const IconWithText = ({ src, text, className }) => (
+  <div className="flex flex-row items-center space-x-2">
+    <img
+      src={src}
+      className={`h-16 w-16 p-2 bg-white shadow-md rounded-[8px] ${className}`}
+      alt="icon"
+    />
+    <p className="font-bold text-white">{text}</p>
   </div>
 );
 

@@ -1,7 +1,7 @@
-import { Homepage } from "pages";
+import { SignUp } from "pages";
 
 function App() {
-  return <Homepage />;
+  return <SignUp />;
 }
 
 export default App;
