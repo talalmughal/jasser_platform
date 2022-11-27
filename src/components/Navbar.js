@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import LogoGray from "assets/svg/LogoGray.svg";
 import LogoWhite from "assets/svg/LogoWhite.svg";
-import {
-  AiFillInstagram,
-  AiFillLinkedin,
-  AiFillTwitterCircle,
-  AiFillPhone,
-} from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Button } from "./Button";
 
 const Navbar = ({ dark }) => {
   const [menu, setMenu] = useState(false);
@@ -27,10 +22,13 @@ const Navbar = ({ dark }) => {
 
         {menu ? (
           <ul className="absolute right-0 top-12 rounded-md p-4 space-y-2 flex flex-col bg-white shadow-md">
-            <li>About Us</li>
+            <li>Post Job</li>
             <li>Employers</li>
             <li>Applicant</li>
-            <li>Help</li>
+            <li>Profile</li>
+            <li>
+              <Button variant="primary" text="Login" />
+            </li>
           </ul>
         ) : null}
       </div>
@@ -47,26 +45,15 @@ const Navbar = ({ dark }) => {
             dark ? "text-secondary" : "text-white"
           } font-medium`}
         >
-          <li>About Us</li>
-          <li>Employers</li>
-          <li>Applicant</li>
-          <li>Help</li>
+          <li>Post Job</li> {/* show this item for user type employer */}
+          <li>Employers</li> {/* show this item for user type user */}
+          <li>Applicant</li> {/* show this item for user type employer */}
+          <li>Profile</li>
         </ul>
       </div>
-      <ul className="hidden md:flex flex-row items-center justify-end space-x-4 w-full">
-        <li>
-          <AiFillInstagram size={24} fill={dark ? "white" : "black"} />
-        </li>
-        <li>
-          <AiFillLinkedin size={24} fill={dark ? "white" : "black"} />
-        </li>
-        <li>
-          <AiFillTwitterCircle size={24} fill={dark ? "white" : "black"} />
-        </li>
-        <li>
-          <AiFillPhone size={24} fill={dark ? "white" : "black"} />
-        </li>
-      </ul>
+      <div className="hidden md:flex flex-row items-center justify-end space-x-4 w-full">
+        <Button variant="primary" text="Login" />
+      </div>
     </nav>
   );
 };

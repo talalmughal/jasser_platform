@@ -21,8 +21,8 @@ const Input = ({
           id={id}
           value={value}
           onChange={onChange}
-          rows={4}
-          className="h-[40px] rounded-[8px] border-[1px] border-gray px-2 focus:outline-gray"
+          rows="5"
+          className="rounded-[8px] border-[1px] border-gray px-2 focus:outline-gray"
         />
       ) : (
         <input

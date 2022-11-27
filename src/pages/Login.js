@@ -1,12 +1,12 @@
 import { AuthLayout, Button, Input } from "components";
 import React, { useState } from "react";
 
-const SignUp = () => {
+const Login = () => {
   const [userType, setUserType] = useState("user");
   return (
     <AuthLayout>
-      <div className="flex flex-col items-center justify-center p-8 space-y-4">
-        <p className="text-2xl font-bold">Create an account</p>
+      <div className="flex flex-col items-center justify-center p-8 lg:px-32 space-y-4">
+        <p className="text-2xl font-bold text-center">Login to your account</p>
         <div className="flex flex-col space-y-1 w-full">
           <label className="font-medium">User Type</label>
           <select
@@ -18,34 +18,18 @@ const SignUp = () => {
             <option value="employer">Eployer</option>
           </select>
         </div>
-        <Input type="file" placeholder="" label="Profile Picture" />
-        <Input placeholder="Enter your name" label="Name" />
         <Input type="email" placeholder="Enter your email" label="Email" />
         <Input
           type="password"
           placeholder="Enter your password"
           label="Password"
         />
-        <Input
-          type="text"
-          placeholder="Enter your phone number"
-          label="Phone Number"
-        />
-        <Input type="textarea" placeholder="About You" label="About" />
-        {userType === "user" ? (
-          <Input type="file" placeholder="" label="Upload your Resume" />
-        ) : null}
-        <Button variant="primary" text="Sign Up" />
+        <Button text="Login" variant="primary" />
         <p>or</p>
-        <p>
-          ALready have an account?{" "}
-          <span>
-            <Button text="Login" />
-          </span>
-        </p>
+        <Button text="Create an account" variant="tertiary" />
       </div>
     </AuthLayout>
   );
 };
 
-export { SignUp };
+export { Login };
