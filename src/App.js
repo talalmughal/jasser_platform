@@ -9,8 +9,8 @@ import {
   SignUp,
   UserDetails,
 } from "pages";
-// import { Route, Routes } from "react-router-dom";
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -56,20 +56,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <RouterProvider router={router} />
-    // <Routes>
-    //   <Route path="/" element={<Homepage />} />
-    //   <Route path="/login" element={<Login />} />
-    //   <Route path="/signup" element={<SignUp />} />
-    //   <Route path="/profile" element={<Profile />} />
-    //   <Route path="/applicants" element={<Applicants />} />
-    //   <Route path="/employers" element={<Employers />} />
-    //   <Route path="/jobpost" element={<JobPost />} />
-    //   <Route path="/jobdetails/:id" element={<JobDetails />} />
-    //   <Route path="/user/:id" element={<UserDetails />} />
-    // </Routes>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
