@@ -3,9 +3,12 @@ import LogoGray from "assets/svg/LogoGray.svg";
 import LogoWhite from "assets/svg/LogoWhite.svg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Button } from "./Button";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ dark }) => {
   const [menu, setMenu] = useState(false);
+  const navigate = useNavigate();
+
   return (
     <nav className="relative z-50 flex flex-row items-center justify-between py-2 px-4 md:px-8 xl:px-16 bg-transparent">
       <div className="md:hidden relative flex flex-row items-center justify-between w-full">
@@ -13,6 +16,7 @@ const Navbar = ({ dark }) => {
           src={dark ? LogoWhite : LogoGray}
           className="h-16 w-20"
           alt="Logo"
+          onClick={() => navigate("/")}
         />
         <GiHamburgerMenu
           size={24}
@@ -22,12 +26,16 @@ const Navbar = ({ dark }) => {
 
         {menu ? (
           <ul className="absolute right-0 top-12 rounded-md p-4 space-y-2 flex flex-col bg-white shadow-md">
-            <li>Post Job</li>
-            <li>Employers</li>
-            <li>Applicant</li>
-            <li>Profile</li>
+            <li onClick={() => navigate("/jobpost")}>Post Job</li>
+            <li onClick={() => navigate("/employers")}>Employers</li>
+            <li onClick={() => navigate("/applicants")}>Applicant</li>
+            <li onClick={() => navigate("/profile")}>Profile</li>
             <li>
-              <Button variant="primary" text="Login" />
+              <Button
+                variant="primary"
+                text="Login"
+                onClick={() => navigate("/login")}
+              />
             </li>
           </ul>
         ) : null}
@@ -37,6 +45,7 @@ const Navbar = ({ dark }) => {
           src={dark ? LogoWhite : LogoGray}
           className="h-16 w-20"
           alt="Logo"
+          onClick={() => navigate("/")}
         />
         <ul
           className={`text-xs lg:text-lg flex flex-row items-center justify-center space-x-2 md:space-x-4 ${
@@ -45,14 +54,16 @@ const Navbar = ({ dark }) => {
             dark ? "text-secondary" : "text-white"
           } font-medium`}
         >
-          <li>Post Job</li> {/* show this item for user type employer */}
-          <li>Employers</li> {/* show this item for user type user */}
-          <li>Applicant</li> {/* show this item for user type employer */}
-          <li>Profile</li>
+          <li onClick={() => navigate("/jobpost")}>Post Job</li>
+          <li onClick={() => navigate("/employers")}>Employers</li>
+          <li onClick={() => navigate("/applicants")}>Applicant</li>
+          <li onClick={() => navigate("/profile")}>Profile</li>
         </ul>
-      </div>
-      <div className="hidden md:flex flex-row items-center justify-end space-x-4 w-full">
-        <Button variant="primary" text="Login" />
+        <Button
+          variant="primary"
+          text="Login"
+          onClick={() => navigate("/login")}
+        />
       </div>
     </nav>
   );

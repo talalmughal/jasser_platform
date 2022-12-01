@@ -21,13 +21,13 @@ const Homepage = () => {
     <Layout>
       <div className="grid grid-cols-1 md:grid-cols-2 -mt-20">
         <div className="order-last md:order-first flex flex-col items-center justify-center w-full p-8 leading-10 bg-[#F6FAFD]">
-          <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-darkGray py-2">
+          <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-secondary py-2">
             Search Between
           </p>
-          <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-darkGray py-2">
+          <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-secondary py-2">
             <span className="text-primary">200+</span> Companies
           </p>
-          <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-darkGray py-2">
+          <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-secondary py-2">
             <span className="text-primary">12+</span> Universities
           </p>
           <p className="py-4 text-center">
@@ -54,22 +54,22 @@ const Homepage = () => {
         <ImageWithText src={Img2} text="65+ Partnerships" />
       </div>
       <div className="w-full p-8 flex flex-col items-center justify-center space-y-8 bg-[#F6FAFD]">
-        <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-darkGray py-2">
+        <p className="text-[30px] md:text-[35px] lg:text-[50px] font-bold text-secondary py-2">
           What are you looking for?
         </p>
         <div className="w-full flex flex-col sm:flex-row items-center justify-center space-x-0 sm:space-x-8 space-y-4 sm:space-y-0">
           <div className="flex flex-col items-center justify-center rounded-[20px] shadow-lg p-4 w-72 space-y-4 h-96">
             <img src={Hiring} className="w-48 h-48" alt="icon" />
-            <p className="text-darkGray text-2xl font-bold">Who is hiring?</p>
-            <p className="text-center">
+            <p className="text-secondary text-2xl font-bold">Who is hiring?</p>
+            <p className="text-center text-secondary">
               Search between 50+ companies for a job in your major, region and
               best environments
             </p>
           </div>
           <div className="flex flex-col items-center justify-center rounded-[20px] shadow-lg p-4 w-72 space-y-4 h-96">
             <img src={Talent} className="w-48 h-48" alt="icon" />
-            <p className="text-darkGray text-2xl font-bold">Who is hiring?</p>
-            <p className="text-center">
+            <p className="text-secondary text-2xl font-bold">Who is hiring?</p>
+            <p className="text-center text-secondary">
               Search between 4000+ applicants find the best talents for the
               right postions
             </p>

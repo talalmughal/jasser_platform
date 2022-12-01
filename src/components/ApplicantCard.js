@@ -1,9 +1,15 @@
 import React from "react";
 import ApplicantImg from "assets/images/Applicant.png";
+import { useNavigate } from "react-router-dom";
 
 const ApplicantCard = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 shadow-lg rounded-[15px]">
+    <div
+      onClick={() => navigate("/employers/:id")}
+      className="flex flex-col items-center justify-center space-y-4 shadow-lg rounded-[15px]"
+    >
       <img src={ApplicantImg} className="h-32 w-24" alt="applicant" />
       <div className="bg-gray w-full px-4 py-2 rounded-[0_0_15px_15px] space-y-2">
         <p className="text-white font-bold uppercase text-xl">Umar Khalid</p>

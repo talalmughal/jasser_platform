@@ -2,22 +2,27 @@ import { ApplicantCard, Layout } from "components";
 import React from "react";
 import Banner from "assets/svg/WhiteSprinkles.svg";
 import Search from "assets/svg/Search.svg";
-
+import { MdTune } from "react-icons/md";
 const Applicants = () => {
   return (
     <Layout dark={true}>
-      <div className="bg-gradient-to-r from-[#46556A] via-[#232B35] to-[#232B35] p-20 -mt-20">
+      <div className="bg-gradient-to-r from-[#46556A] via-[#232B35] to-[#232B35] h-[250px] p-20 -mt-20">
         <img src={Banner} className="w-full h-full" alt="banner" />
       </div>
       <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 px-4 py-8 md:px-32">
-        <p className="text-darkGray font-bold text-xl">Search for Applicants</p>
-        <div className="flex flex-row items-center justify-between bg-white rounded-full shadow-md px-4 w-[90%] m-auto md:m-0 lg:w-[40%] py-2 bg-[#F6FAFD]">
-          <input
-            type="text"
-            placeholder="Search for applicants"
-            className="rounded-full focus:outline-none w-full pr-4"
-          />
-          <img src={Search} alt="search" className="h-6 w-6" />
+        <p className="text-darkGray font-bold text-xl w-full">
+          Search for Applicants
+        </p>
+        <div className="flex flex-row items-center justify-end space-x-4 w-[90%]">
+          <div className="flex flex-row items-center justify-between rounded-full shadow-md px-4  m-auto md:m-0 lg:w-[40%] py-2 bg-[#F6FAFD]">
+            <input
+              type="text"
+              placeholder="Search for applicants"
+              className="rounded-full focus:outline-none w-full pr-4 bg-[#F6FAFD]"
+            />
+            <img src={Search} alt="search" className="h-6 w-6" />
+          </div>
+          <MdTune size={36} className="bg-[#F6FAFD] rounded-md shadow-md" />
         </div>
       </div>
       <div className="flex flex-row items-center justify-between flex-wrap gap-8 px-16 py-4 w-full">
