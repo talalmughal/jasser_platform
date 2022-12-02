@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [userType, setUserType] = useState("user");
+  const [userType, setUserType] = useState("applicant");
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
@@ -136,7 +136,7 @@ const SignUp = () => {
             onChange={(e) => setUserType(e.target.value)}
             className="h-[40px] rounded-[8px] border-[1px]  border-[#F6FAFD] shadow-lg px-2 focus:outline-gray w-full"
           >
-            <option value="user">User</option>
+            <option value="applicant">Applicant</option>
             <option value="employer">Employer</option>
           </select>
         </div>

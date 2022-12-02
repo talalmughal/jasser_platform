@@ -1,9 +1,19 @@
 import { initializeApp } from "firebase/app";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  getFirestore,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 
 import {
+  browserLocalPersistence,
   createUserWithEmailAndPassword,
   getAuth,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 import { getStorage, ref, uploadBytes } from "firebase/storage";
@@ -35,6 +45,41 @@ export async function signup(email, password) {
     return ret;
   } catch (error) {
     console.log("Something went wrong in firebase/signup funtion: ", error);
+    return error;
+  }
+}
+
+// for fetching user document's reference
+export async function getUserDocRef(email, userType) {
+  try {
+    const userCollectionRef = collection(db, userType);
+    const querySnapshot = query(
+      userCollectionRef,
+      where("email", "==", email)
+    );
+    const response = await getDocs(querySnapshot);
+    let userDocRef;
+    response.forEach((doc) => {
+      userDocRef = doc.id;
+    });
+    return userDocRef;
+  } catch (error) {
+    console.log(
+      "Something went wrong in firebase/getUserDocRef function: ",
+      error
+    );
+  }
+}
+
+// for user to log in
+export async function login(email, password, userType) {
+  try {
+    const creds = await signInWithEmailAndPassword(auth, email, password);
+    await auth.setPersistence(browserLocalPersistence);
+    const userDocRef = await getUserDocRef(creds?.user?.email, userType);
+    return userDocRef;
+  } catch (error) {
+    console.log("Something went wrong in firebase/login funtion: ", error);
     return error;
   }
 }
