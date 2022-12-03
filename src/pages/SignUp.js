@@ -194,7 +194,7 @@ const SignUp = () => {
         </div>
 
         <div className="flex flex-col md:flex-row gap-8 items-center w-full">
-          {userType === "user" ? (
+          {userType === "applicant" ? (
             <Input
               type="file"
               placeholder=""

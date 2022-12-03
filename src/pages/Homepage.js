@@ -1,5 +1,5 @@
 import { Layout } from "components";
-import React from "react";
+import React, { useEffect } from "react";
 import Search from "assets/svg/Search.svg";
 import Talent from "assets/svg/Talent.svg";
 import Hiring from "assets/svg/Hiring.svg";
@@ -17,6 +17,12 @@ import Map from "assets/images/Map.png";
 import SuccessPartners from "assets/images/SuccessPartners.png";
 
 const Homepage = () => {
+  // scrolling to the top
+  useEffect(() => {
+    document.documentElement.click();
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Layout>
       <div className="grid grid-cols-1 md:grid-cols-2 -mt-20">

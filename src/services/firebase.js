@@ -16,7 +16,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -53,10 +53,7 @@ export async function signup(email, password) {
 export async function getUserDocRef(email, userType) {
   try {
     const userCollectionRef = collection(db, userType);
-    const querySnapshot = query(
-      userCollectionRef,
-      where("email", "==", email)
-    );
+    const querySnapshot = query(userCollectionRef, where("email", "==", email));
     const response = await getDocs(querySnapshot);
     let userDocRef;
     response.forEach((doc) => {
@@ -113,10 +110,7 @@ export async function createJob(jobData, jobDocRef) {
   try {
     await setDoc(doc(db, "job", jobDocRef), jobData);
   } catch (error) {
-    console.log(
-      "Something went wrong in firebase/createJob funtion: ",
-      error
-    );
+    console.log("Something went wrong in firebase/createJob funtion: ", error);
   }
 }
 
@@ -144,4 +138,48 @@ export async function uploadResume(resume, storageFolder) {
       error
     );
   }
+}
+
+// to get all jobs
+export async function getAllJobs() {
+  try {
+    const jobCollectionRef = collection(db, "job");
+    const response = await getDocs(jobCollectionRef);
+    let jobs = response.docs.map((doc) => ({
+      data: doc.data(),
+      id: doc.id,
+    }));
+    return jobs;
+  } catch (error) {
+    console.log("Something went wrong in firebase/getJobs funtion: ", error);
+  }
+}
+
+// to get all employers
+export async function getAllEmployers() {
+  try {
+    const employerCollectionRef = collection(db, "employer");
+    const response = await getDocs(employerCollectionRef);
+    let employers = response.docs.map((doc) => ({
+      data: doc.data(),
+      id: doc.id,
+    }));
+    return employers;
+  } catch (error) {
+    console.log(
+      "Something went wrong in firebase/getAllEmployers funtion: ",
+      error
+    );
+  }
+}
+
+// to get all employers
+export async function getProfilePicture(storageReference) {
+  const res = await getDownloadURL(
+    ref(storage, `${storageReference}/ProfilePicture`)
+  );
+  return {
+    id: storageReference,
+    picture: res,
+  };
 }

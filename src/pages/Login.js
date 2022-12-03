@@ -25,6 +25,9 @@ const Login = () => {
   // validation alert if invalid password is provided
   const invalidPassword = () => toast.warning("Wrong password provided.");
 
+  // validation alert if invalid password is provided
+  const userNotFound = () => toast.warning("This account does not exist.");
+
   // validation alert in case of failing to sign in
   const signinFailed = () => toast.error("Sign in failed. Please try again.");
 
@@ -39,27 +42,29 @@ const Login = () => {
 
   // process of signing in the user
   const handleSignin = async () => {
-    try {
-      let userDocRef = undefined;
-      userDocRef = await login(email, password, userType);
-      if (!userDocRef?.code) {
-        setSuccessfullSignin(true);
-        setAnythingMissing(false);
-        setShowLoader("hidden");
-        if (userDocRef !== undefined) {
-          navigate("/");
-        }
+    let userDocRef = undefined;
+    userDocRef = await login(email, password, userType);
+    if (!userDocRef?.code) {
+      setSuccessfullSignin(true);
+      setAnythingMissing(false);
+      setShowLoader("hidden");
+      if (userDocRef !== undefined) {
+        navigate("/");
       }
-    } catch (error) {
+    } else {
       setShowLoader("hidden");
       setSuccessfullSignin(false);
-      if (error.code === "auth/invalid-email") {
+      console.log(userDocRef);
+      if (userDocRef.code === "auth/invalid-email") {
         invalidEmail();
       }
-      if (error.code === "auth/wrong-password") {
+      if (userDocRef.code === "auth/wrong-password") {
         invalidPassword();
       }
-      console.log("error: ", error);
+      if (userDocRef.code === "auth/user-not-found") {
+        userNotFound();
+      }
+      console.log("error: ", userDocRef);
     }
   };
 
