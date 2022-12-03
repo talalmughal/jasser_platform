@@ -114,6 +114,18 @@ export async function createJob(jobData, jobDocRef) {
   }
 }
 
+// to create an application
+export async function createApplication(applicationDocRef, applicationData) {
+  try {
+    await setDoc(doc(db, "application", applicationDocRef), applicationData);
+  } catch (error) {
+    console.log(
+      "Something went wrong in firebase/createApplication funtion: ",
+      error
+    );
+  }
+}
+
 // to upload profile-picture to firebase storage
 export async function uploadProfilePicture(profilePicture, storageFolder) {
   try {

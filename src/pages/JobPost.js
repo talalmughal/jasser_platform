@@ -49,6 +49,7 @@ const JobPost = () => {
         description,
         salaryRange,
         timing,
+        postedBy: JSON.parse(localStorage.getItem("user")).userDocRef,
       };
 
       await createJob(job, jobDocRef);

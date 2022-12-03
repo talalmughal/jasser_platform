@@ -7,8 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ dark }) => {
   const [menu, setMenu] = useState(false);
-  const [isLoggedIn] = useState(true);
   const navigate = useNavigate();
+  const userDocRef = JSON.parse(localStorage.getItem("user"))?.userDocRef;
+  const userType = JSON.parse(localStorage.getItem("user"))?.userType;
+  const isLoggedIn =
+    typeof userDocRef && userDocRef !== "" && userType && userType !== "";
 
   return (
     <nav className="relative z-50 flex flex-row items-center justify-between py-2 px-4 md:px-8 xl:px-16 bg-transparent">
@@ -50,7 +53,14 @@ const Navbar = ({ dark }) => {
                   <Button
                     variant="primary"
                     text="Logout"
-                    onClick={() => navigate("/login")}
+                    onClick={() => {
+                      const user = {
+                        userDocRef: "",
+                        userType: "",
+                      };
+                      localStorage.setItem("user", JSON.stringify(user));
+                      navigate("/login");
+                    }}
                   />
                 </li>
               </ul>
@@ -101,7 +111,14 @@ const Navbar = ({ dark }) => {
           <Button
             variant="primary"
             text="Logout"
-            onClick={() => navigate("/login")}
+            onClick={() => {
+              const user = {
+                userDocRef: "",
+                userType: "",
+              };
+              localStorage.setItem("user", JSON.stringify(user));
+              navigate("/login");
+            }}
           />
         ) : (
           <Button

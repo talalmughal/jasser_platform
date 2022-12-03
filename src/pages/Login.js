@@ -44,17 +44,19 @@ const Login = () => {
   const handleSignin = async () => {
     let userDocRef = undefined;
     userDocRef = await login(email, password, userType);
-    if (!userDocRef?.code) {
+    if (userDocRef && !userDocRef?.code) {
+      const user = {
+        userDocRef,
+        userType,
+      };
+      localStorage.setItem("user", JSON.stringify(user));
       setSuccessfullSignin(true);
       setAnythingMissing(false);
       setShowLoader("hidden");
-      if (userDocRef !== undefined) {
-        navigate("/");
-      }
+      navigate("/");
     } else {
       setShowLoader("hidden");
       setSuccessfullSignin(false);
-      console.log(userDocRef);
       if (userDocRef.code === "auth/invalid-email") {
         invalidEmail();
       }

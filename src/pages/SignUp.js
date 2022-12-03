@@ -95,8 +95,9 @@ const SignUp = () => {
         college,
         majors,
         aboutYou,
+        userType,
       };
-      if (userType === "user") {
+      if (userType === "applicant") {
         await createApplicant(user, applicantDocRef);
         await uploadResume(resume, applicantDocRef);
       } else {
@@ -106,7 +107,7 @@ const SignUp = () => {
       setSuccessfullSignup(true);
       setAnythingMissing(false);
       setShowLoader("hidden");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       setShowLoader("hidden");
       setSuccessfullSignup(false);
