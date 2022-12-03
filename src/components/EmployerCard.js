@@ -36,7 +36,7 @@ const EmployerCard = ({ employer, ...rest }) => {
           ))}
         </div>
         <button className="bg-white rounded-[5px] font-medium m-auto w-full text-xs px-4 py-1">
-          Apply Now
+          View Details
         </button>
       </div>
     </div>

@@ -7,3 +7,4 @@ export * from "./JobPost";
 export * from "./JobDetails";
 export * from "./UserDetails";
 export * from "./Profile";
+export * from "./MyJobs";

@@ -5,3 +5,4 @@ export * from "./EmployerCard";
 export * from "./AuthLayout";
 export * from "./Input";
 export * from "./Button";
+export * from "./ProtectedRoute";
