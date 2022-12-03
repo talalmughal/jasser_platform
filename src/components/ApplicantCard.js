@@ -24,7 +24,7 @@ const ApplicantCard = () => {
           ))}
         </div>
         <button className="bg-white rounded-[5px] font-medium m-auto w-full text-xs px-4 py-1">
-          View Cv
+          View Details
         </button>
       </div>
     </div>

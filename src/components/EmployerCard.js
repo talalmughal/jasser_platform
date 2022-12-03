@@ -7,7 +7,7 @@ const EmployerCard = () => {
 
   return (
     <div
-      onClick={() => navigate("/employers/:id")}
+      onClick={() => navigate("/job/abc")}
       className="flex flex-col items-center justify-center space-y-4 shadow-lg rounded-[15px]"
     >
       <img src={Logo} className="h-32 w-24" alt="applicant" />
@@ -24,7 +24,7 @@ const EmployerCard = () => {
           ))}
         </div>
         <button className="bg-white rounded-[5px] font-medium m-auto w-full text-xs px-4 py-1">
-          Apply Now
+          View Details
         </button>
       </div>
     </div>
