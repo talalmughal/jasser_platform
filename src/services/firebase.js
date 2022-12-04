@@ -185,7 +185,25 @@ export async function getAllEmployers() {
   }
 }
 
-// to get all employers
+// to get all applicants
+export async function getAllApplicants() {
+  try {
+    const applicantCollectionRef = collection(db, "applicant");
+    const response = await getDocs(applicantCollectionRef);
+    let applicants = response.docs.map((doc) => ({
+      data: doc.data(),
+      id: doc.id,
+    }));
+    return applicants;
+  } catch (error) {
+    console.log(
+      "Something went wrong in firebase/getAllApplicants funtion: ",
+      error
+    );
+  }
+}
+
+// to get a user's profile picture
 export async function getProfilePicture(storageReference) {
   const res = await getDownloadURL(
     ref(storage, `${storageReference}/ProfilePicture`)
@@ -194,4 +212,25 @@ export async function getProfilePicture(storageReference) {
     id: storageReference,
     picture: res,
   };
+}
+
+// to get a user's resume Link
+export async function getResumeLink(storageReference) {
+  try {
+    const res = await getDownloadURL(
+      ref(storage, `${storageReference}/Resume`)
+    );
+    return {
+      id: storageReference,
+      resume: res,
+    };
+  } catch (error) {
+    if (error.code === "storage/object-not-found") {
+    } else {
+      console.log(
+        "Something went wrong in firebase/getResumeLink function: ",
+        error
+      );
+    }
+  }
 }

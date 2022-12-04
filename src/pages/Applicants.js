@@ -1,9 +1,25 @@
 import { ApplicantCard, Layout } from "components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "assets/svg/WhiteSprinkles.svg";
 import Search from "assets/svg/Search.svg";
 import { MdTune } from "react-icons/md";
+import { getAllApplicants } from "services/firebase";
+import { Loader } from "components/Loader";
+
 const Applicants = () => {
+  const [applicants, setApplicants] = useState("");
+
+  // fetching jobs to be displayed to the logged-in applicant
+  useEffect(() => {
+    const getApplicants = async () => {
+      const response = await getAllApplicants();
+      console.log("response: ", response);
+      setApplicants(response);
+    };
+
+    if (!applicants || applicants === "") getApplicants();
+  }, [applicants]);
+
   return (
     <Layout dark={true}>
       <div className="bg-gradient-to-r from-[#46556A] via-[#232B35] to-[#232B35] h-[250px] p-20 -mt-20">
@@ -33,16 +49,18 @@ const Applicants = () => {
         <Tab text="Female" />
         <Tab text="Khobar" />
       </div>
-      <div className="grid grid-cols-1 sm-grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 py-8 px-16">
-        <ApplicantCard />
-        <ApplicantCard />
-        <ApplicantCard />
-        <ApplicantCard />
-        <ApplicantCard />
-        <ApplicantCard />
-        <ApplicantCard />
-        <ApplicantCard />
-      </div>
+
+      {applicants === "" ? (
+        <div className="flex w-full justify-center items-center mx-auto my-8">
+          <Loader showLoader={""} />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm-grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 py-8 px-16">
+          {applicants.map((applicant, i) => (
+            <ApplicantCard applicant={applicant} key={i} />
+          ))}
+        </div>
+      )}
     </Layout>
   );
 };
