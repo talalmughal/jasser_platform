@@ -13,7 +13,6 @@ const Applicants = () => {
   useEffect(() => {
     const getApplicants = async () => {
       const response = await getAllApplicants();
-      console.log("response: ", response);
       setApplicants(response);
     };
 

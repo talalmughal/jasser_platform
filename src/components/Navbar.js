@@ -32,11 +32,19 @@ const Navbar = ({ dark }) => {
 
             {menu ? (
               <ul className="absolute right-0 top-12 rounded-md p-4 space-y-2 flex flex-col bg-white shadow-md">
-                <li onClick={() => navigate("/jobpost")}>Post Job</li>
-                <li onClick={() => navigate("/employers")}>Employers</li>
-                <li onClick={() => navigate("/applicants")}>Applicant</li>
+                {userType !== "employer" && (
+                  <li onClick={() => navigate("/employers")}>Employers</li>
+                )}
+                {userType !== "applicant" && (
+                  <li onClick={() => navigate("/applicants")}>Applicants</li>
+                )}
+                {userType !== "applicant" && (
+                  <li onClick={() => navigate("/jobpost")}>Post Job</li>
+                )}
+                {userType !== "employer" && (
+                  <li onClick={() => navigate("/myjobs")}>My Jobs</li>
+                )}
                 <li onClick={() => navigate("/profile")}>Profile</li>
-                <li onClick={() => navigate("/jobPosts")}>My Jobs</li>
                 <li>
                   <a
                     href="https://www.jassersa.com"
@@ -91,11 +99,19 @@ const Navbar = ({ dark }) => {
               dark ? "text-secondary" : "text-white"
             } font-medium`}
           >
-            <li onClick={() => navigate("/jobpost")}>Post Job</li>
-            <li onClick={() => navigate("/employers")}>Employers</li>
-            <li onClick={() => navigate("/applicants")}>Applicant</li>
+            {userType !== "employer" && (
+              <li onClick={() => navigate("/employers")}>Employers</li>
+            )}
+            {userType !== "applicant" && (
+              <li onClick={() => navigate("/applicants")}>Applicants</li>
+            )}
+            {userType !== "applicant" && (
+              <li onClick={() => navigate("/jobpost")}>Post Job</li>
+            )}
+            {userType !== "employer" && (
+              <li onClick={() => navigate("/myjobs")}>My Jobs</li>
+            )}
             <li onClick={() => navigate("/profile")}>Profile</li>
-            <li onClick={() => navigate("/myjobs")}>My Jobs</li>
             <li>
               <a
                 href="https://www.jassersa.com"
