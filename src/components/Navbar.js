@@ -7,8 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ dark }) => {
   const [menu, setMenu] = useState(false);
-  const [isLoggedIn] = useState(true);
   const navigate = useNavigate();
+  const userDocRef = JSON.parse(localStorage.getItem("user"))?.userDocRef;
+  const userType = JSON.parse(localStorage.getItem("user"))?.userType;
+  const isLoggedIn =
+    typeof userDocRef && userDocRef !== "" && userType && userType !== "";
 
   return (
     <nav className="relative z-50 flex flex-row items-center justify-between py-2 px-4 md:px-8 xl:px-16 bg-transparent">
@@ -29,11 +32,19 @@ const Navbar = ({ dark }) => {
 
             {menu ? (
               <ul className="absolute right-0 top-12 rounded-md p-4 space-y-2 flex flex-col bg-white shadow-md">
-                <li onClick={() => navigate("/jobpost")}>Post Job</li>
-                <li onClick={() => navigate("/employers")}>Employers</li>
-                <li onClick={() => navigate("/applicants")}>Applicant</li>
+                {userType !== "employer" && (
+                  <li onClick={() => navigate("/employers")}>Employers</li>
+                )}
+                {userType !== "applicant" && (
+                  <li onClick={() => navigate("/applicants")}>Applicants</li>
+                )}
+                {userType !== "applicant" && (
+                  <li onClick={() => navigate("/jobpost")}>Post Job</li>
+                )}
+                {userType !== "employer" && (
+                  <li onClick={() => navigate("/myjobs")}>My Jobs</li>
+                )}
                 <li onClick={() => navigate("/profile")}>Profile</li>
-                <li onClick={() => navigate("/jobPosts")}>My Jobs</li>
                 <li>
                   <a
                     href="https://www.jassersa.com"
@@ -50,7 +61,14 @@ const Navbar = ({ dark }) => {
                   <Button
                     variant="primary"
                     text="Logout"
-                    onClick={() => navigate("/login")}
+                    onClick={() => {
+                      const user = {
+                        userDocRef: "",
+                        userType: "",
+                      };
+                      localStorage.setItem("user", JSON.stringify(user));
+                      navigate("/login");
+                    }}
                   />
                 </li>
               </ul>
@@ -81,11 +99,19 @@ const Navbar = ({ dark }) => {
               dark ? "text-secondary" : "text-white"
             } font-medium`}
           >
-            <li onClick={() => navigate("/jobpost")}>Post Job</li>
-            <li onClick={() => navigate("/employers")}>Employers</li>
-            <li onClick={() => navigate("/applicants")}>Applicant</li>
+            {userType !== "employer" && (
+              <li onClick={() => navigate("/employers")}>Employers</li>
+            )}
+            {userType !== "applicant" && (
+              <li onClick={() => navigate("/applicants")}>Applicants</li>
+            )}
+            {userType !== "applicant" && (
+              <li onClick={() => navigate("/jobpost")}>Post Job</li>
+            )}
+            {userType !== "employer" && (
+              <li onClick={() => navigate("/myjobs")}>My Jobs</li>
+            )}
             <li onClick={() => navigate("/profile")}>Profile</li>
-            <li onClick={() => navigate("/myjobs")}>My Jobs</li>
             <li>
               <a
                 href="https://www.jassersa.com"
@@ -101,7 +127,14 @@ const Navbar = ({ dark }) => {
           <Button
             variant="primary"
             text="Logout"
-            onClick={() => navigate("/login")}
+            onClick={() => {
+              const user = {
+                userDocRef: "",
+                userType: "",
+              };
+              localStorage.setItem("user", JSON.stringify(user));
+              navigate("/login");
+            }}
           />
         ) : (
           <Button

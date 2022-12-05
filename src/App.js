@@ -11,12 +11,16 @@ import {
   SignUp,
   UserDetails,
 } from "pages";
-import { useState } from "react";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
-  const [isLoggedIn] = useState(true);
+  const userDocRef = JSON.parse(localStorage.getItem("user"))?.userDocRef;
+  const userType = JSON.parse(localStorage.getItem("user"))?.userType;
+
+  const isLoggedIn =
+    typeof userDocRef && userDocRef !== "" && userType && userType !== "";
+
   const router = createBrowserRouter([
     {
       path: "/",

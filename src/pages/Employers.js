@@ -1,10 +1,24 @@
 import { Layout, EmployerCard } from "components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "assets/svg/GraySprinkles.svg";
 import Search from "assets/svg/Search.svg";
 import { MdTune } from "react-icons/md";
+import { getAllEmployers } from "services/firebase";
+import { Loader } from "components/Loader";
 
 const Employers = () => {
+  const [employers, setEmployers] = useState("");
+
+  // fetching jobs to be displayed to the logged-in applicant
+  useEffect(() => {
+    const getEmployers = async () => {
+      const response = await getAllEmployers();
+      setEmployers(response);
+    };
+
+    if (!employers || employers === "") getEmployers();
+  }, [employers]);
+
   return (
     <Layout>
       <div className="bg-white p-20 h-[250px] -mt-20">
@@ -35,16 +49,18 @@ const Employers = () => {
         <Tab text="Female" />
         <Tab text="Khobar" />
       </div>
-      <div className="grid grid-cols-1 sm-grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 py-8 px-16">
-        <EmployerCard />
-        <EmployerCard />
-        <EmployerCard />
-        <EmployerCard />
-        <EmployerCard />
-        <EmployerCard />
-        <EmployerCard />
-        <EmployerCard />
-      </div>
+
+      {employers === "" ? (
+        <div className="flex w-full justify-center items-center mx-auto my-8">
+          <Loader showLoader={""} />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm-grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 py-8 px-16">
+          {employers.map((employer, i) => (
+            <EmployerCard employer={employer} key={i} />
+          ))}
+        </div>
+      )}
     </Layout>
   );
 };

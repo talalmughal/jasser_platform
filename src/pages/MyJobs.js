@@ -1,9 +1,24 @@
 import { Layout } from "components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Banner from "assets/svg/WhiteSprinkles.svg";
 import Search from "assets/svg/Search.svg";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { getAllJobs } from "services/firebase";
+import { Loader } from "components/Loader";
+
 const MyJobs = () => {
+  const [jobs, setJobs] = useState("");
+
+  // fetching jobs to be displayed to the logged-in applicant
+  useEffect(() => {
+    const getEmployers = async () => {
+      const response = await getAllJobs();
+      setJobs(response);
+    };
+
+    if (!jobs || jobs === "") getEmployers();
+  }, [jobs]);
+
   return (
     <Layout dark={true}>
       <div className="bg-gradient-to-r from-[#46556A] via-[#232B35] to-[#232B35] h-[250px] p-20 -mt-20">
@@ -24,32 +39,31 @@ const MyJobs = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col divide-y-[1px] divide-gray gap-4 py-8 px-16">
-        <JobItem />
-        <JobItem />
-        <JobItem />
-        <JobItem />
-        <JobItem />
-      </div>
+
+      {jobs === "" ? (
+        <div className="flex w-full justify-center items-center mx-auto my-8">
+          <Loader showLoader={""} />
+        </div>
+      ) : (
+        <div className="flex flex-col divide-y-[1px] divide-gray gap-4 py-8 px-16">
+          {jobs.map((job, i) => (
+            <JobItem job={job} key={i} />
+          ))}
+        </div>
+      )}
     </Layout>
   );
 };
 
-const JobItem = () => {
-  const navigate = useNavigate();
+const JobItem = ({ job, ...rest }) => {
   return (
-    <div
-      className="flex flex-col cursor-pointer"
-      onClick={() => navigate("/job/abc")}
-    >
-      <p className="font-bold text-lg">Job Title</p>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s
-      </p>
-      <p>Timings: 10am - 5pm</p>
-    </div>
+    <Link to="/job/details" state={{ job }}>
+      <div className="flex flex-col cursor-pointer my-4">
+        <p className="font-bold text-lg">{job.data.title}</p>
+        <p>{job.data.description}</p>
+        <p>Timings: {job.data.timing}</p>
+      </div>
+    </Link>
   );
 };
 
